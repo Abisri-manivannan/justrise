@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Admin Panel</title>
+    <style>
+        * {
+    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    min-height: 100vh;
+
+}
+#chart {
+        display:flex;
+        flex-direction: top-center;
+      max-width: 400px;
+      margin: 35px auto;
+    }
+
+a {
+    text-decoration: none;
+}
+li {
+    list-style: none;
+}
+h1,
+h2 {
+    color: #444;
+}
+h3 {
+    color: #999;
+}
+.btn {
+    background: #f05462;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+}
+.btn:hover {
+    color: #f05462;
+    background: white;
+    padding: 3px 8px;
+    border: 2px solid #f05462;
+}
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 15px 10px;
+    border-bottom: 2px solid #999;
+}
+table {
+    padding: 10px;
+}
+th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+.side-menu {
+    position: fixed;
+    background: plum;
+    width: 20vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.side-menu .brand-name {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.side-menu li {
+    font-size: 24px;
+    padding: 10px 40px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+.side-menu li:hover {
+    background: white;
+    color: #f05462;
+}
+.container {
+    position: absolute;
+    right: 0;
+    width: 80vw;
+    height: 100vh;
+    background: #f1f1f1;
+}
+.container .header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80vw;
+    height: 10vh;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+.container .header .nav {
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+.container .header .nav .search {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+}
+.container .header .nav .search input[type=text] {
+    border: none;
+    background: #f1f1f1;
+    padding: 10px;
+    width: 50%;
+}
+.container .header .nav .search button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container .header .nav .search button img {
+    width: 30px;
+    height: 30px;
+}
+.container .header .nav .user {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.container .header .nav .user img {
+    width: 40px;
+    height: 40px;
+}
+.container .header .nav .user .img-case {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+.container .header .nav .user .img-case img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.container .content {
+    position: relative;
+    margin-top: 10vh;
+    min-height: 90vh;
+    background: #f1f1f1;
+}
+.container .content .cards {
+    padding: 20px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.container .content .cards .card {
+    width: 250px;
+    height: 150px;
+    background: white;
+    margin: 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.container .content .content-2 {
+    min-height: 60vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.container .content .content-2 .recent-payments {
+    min-height: 50vh;
+    flex: 5;
+    background: white;
+    margin: 0 25px 25px 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-direction: column;
+}
+.container .content .content-2 .new-students {
+    flex: 2;
+    background: white;
+    min-height: 50vh;
+    margin: 0 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-direction: column;
+}
+.container .content .content-2 .new-students table td:nth-child(1) img {
+    height: 20px;
+    width: 20px;
+}
+@media screen and (max-width: 1050px) {
+    .side-menu li {
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 940px) {
+    .side-menu li span {
+        display: none;
+    }
+    .side-menu {
+        align-items: center;
+    }
+    .side-menu li img {
+        width: 40px;
+        height: 40px;
+    }
+    .side-menu li:hover {
+        background:lightyellow;
+        padding: 8px 38px;
+        border: 2px solid white;
+    }
+}
+@media screen and (max-width:536px) {
+    .brand-name h1 {
+        font-size: 16px;
+    }
+    .container .content .cards {
+        justify-content: center;
+    }
+    .side-menu li img {
+        width: 30px;
+        height: 30px;
+    }
+    .container .content .content-2 .recent-payments table th:nth-child(2),
+    .container .content .content-2 .recent-payments table td:nth-child(2) {
+        display: none;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+            <h1>JUSTRISE</h1>
+        </div>
+
+        <ul>
+            <li><img src="D:\\dashboard" hight="50px" width="50px" alt="">&nbsp; <span>Dashboard</span> </li>
+            <li><img src="D:\\stude"  hight="50px" width="50px" alt="">&nbsp;<span>Students</span> </li>
+            <li><img src="D:\\mailbox" hight="50px" width="50px" alt="">&nbsp;<span>Mail-box</span> </li>
+            <li><img src="D:\\file" hight="50px" width="50px" alt="">&nbsp;<span>File-manager</span> </li>
+            <li><img src="D:\\calender" hight="50px" width="50px" alt="">&nbsp;<span>Calender</span> </li>
+            <a href="D:\\logout.html"><li><img src="D:\\logout" hight="50px" width="50px"  alt="">&nbsp;<span>Log-Out</span> </li></a>
+
+            <li><img src="D:\\hellp"  hight="50px" width="50px" alt="">&nbsp; <span>Help</span></li>
+            <li><img src="D:\\setting" hight="50px" width="50px"  alt="">&nbsp;<span>Settings</span> </li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="nav">
+                <div class="search">
+                    <input type="text" placeholder="Search..">
+                    <button type="submit"><img src="D:\\searches" alt=""></button>
+                </div>
+
+                <div class="user">
+                    <a href="#" class="btn">+</a>
+                    <img src="D:\notifi.png" alt="">
+                    <div class="img-case">
+                        <img src="D:\photo" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="cards">
+                <div class="card">
+                    <div class="box">
+                     <h2>Today's Rate</h2>
+                        <h3>$38,211</h3>
+                        <h6>471 Orders Total</h6>
+                    </div>
+                    <div class="icon-case">
+                        <img src="D:\todays-rates.png"  hight="40px" width="40px"alt="">
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <h2>Active Users</h2>
+                        <h3>23,491</h3>
+                        <h6>790 unique this month</h6>
+                    </div>
+                    <div class="icon-case">
+                        <img src="D:\\activetask" height="40px" width="40px" alt="">
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <h2>DOWNLOADS</h2>
+                        <h3>140,390</h3>
+                        <h6>
+                            87 items downloaded
+                        </h6>
+                    </div>
+                    <div class="icon-case">
+                        <img src="D:\\downloads" height="40px" width="40px" alt="">
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <h2>Active-Tasks</h2>
+                        <h6>Dashboard UI optimisations</h6><br>
+                        <h6>Mailbox cleanup</h6><br>
+                        <h5>Dashboard UI optimisations</h5>
+                    </div>
+                    <div class="icon-case">
+                        <img src="D:\\users active" height="40px" width="40px" alt="">
+                    </div>
+                </div>
+                     <div>
+                    
+                        <img src="D:\\barcharts" height="250px" width="250px">
+                        
+                    <div class="icon-case">
+                        <img src="income.png" alt="">
+                    </div>
+                </div> 
+                <div class="card">
+                    <div class="box">
+                        <h2>Task-Competed</h2>
+                        <h5>1,877</h5>
+                        <h6>Successfuly completed my tasks</h6>
+                    </div>
+                    <div class="icon-case">
+                        <img src="D:\\taskcomp" height="40px" width="40px" alt="">
+                    </div>
+                </div>
+                     
+
+
+                <div class="card">
+                    <div class="box">
+                        <h2>In progress tasks</h2>
+                        <h6>Dashboard UI</h6><br>
+                        <h6>Mailbox</h6><br>
+                        <h6>New e-commerce</h6><br>
+                        <h6>
+                            87 items downloaded
+                        </h6>
+                    </div>
+                     <div class="icon-case">
+                        <img src="D:\\progres" height="40px" width="40px" alt="">
+                    </div>
+                
+                </div>
+                    
+                <div class="card">
+                    <div class="box">
+                        <fieldset class="todo-list">
+        <legend class="todo-list__title">Todo List</legend>
+        <label class="todo-list__label">
+          <input type="checkbox" name="" id="" />
+          <i class="check"></i>
+          <span>Attend meeting</span>
+        </label><br>
+        <label class="todo-list__label">
+          <input type="checkbox" name="" id="" />
+          <i class="check"></i>
+          <span>Complete Assignment</span>
+        </label><br>
+        <label class="todo-list__label">
+          <input type="checkbox" name="" id="" />
+          <i class="check"></i>
+          <span>Finish design for new website</span>
+        </label><br>
+        <label class="todo-list__label">
+          <input type="checkbox" name="" id="" />
+          <i class="check"></i>
+          <span>Go to gym</span>
+        </label><br>
+      </fieldset>
+ 
+                    </div>
+                </div>
+            <div class="content-2">
+                <div class="recent-payments">
+                    <div class="title">
+                        <h2>REPORTS</h2>
+                        <a href="#" class="btn">View All</a>
+                    </div>
+                    <table>
+                        <tr>
+                            <h3><p>Neptune-vl.0 </p></h3>
+                            <a href="#" class="btn">View</a><br>
+                            <h3><p>Space-vl.0.3</p></h3>
+                            <a href="#" class="btn">View</a><br>
+                            <h3><p>Lime-vl.0.4</p></h3>
+                            <a href="#" class="btn">View</a><br>
+                            <h3><p>Circle-vl.0.9</p></h3>
+                            <a href="#" class="btn">View</a><br>
+                            <h3><p>Connect-vl.0.6</p></h3>
+                            <a href="#" class="btn">View</a><br>
+                        </tr>
+                           </table>
+                </div>
+                
+                    <div class="card">
+                    <div class="box">
+                        <h2>BALANCE</h2>
+                        <h3>$218,655</h3>
+                    </div>
+                     <div class="icon-case">
+                        <img src="D:\\balance" height="40px" width="40px" alt="">
+                    </div>
+                
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <h2>ENGAGEMENT</h2>
+                    
+                        
+                        
+                        <h6>
+                            87 items downloaded
+                        </h6>
+                    </div>
+                     <div class="icon-case">
+                        <img src="D:\\engaged" height="40px" width="40px" alt="">
+                    </div>
+                
+                </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js">    
+        document.addEventListener('DOMContentLoaded', function () {
+    var ctx = document.getElementById('earningsChart').getContext('2d');
+    var earningsChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+            datasets: [{
+                label: 'Net Profit',
+                backgroundColor: '#007bff',
+                data: [30, 50, 40, 60, 80, 70, 90, 100, 80, 90]
+            }, {
+                label: 'Revenue',
+                backgroundColor: '#28a745',
+                data: [40, 60, 50, 70, 90, 80, 100, 110, 90, 100]
+            }, {
+                label: 'Free Cash Flow',
+                backgroundColor: '#ffc107',
+                data: [20, 40, 30, 50, 70, 60, 80, 90, 70, 80]
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        display: false
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+});
+</script>
+
+</body>
+
+</html>
